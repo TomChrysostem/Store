@@ -1,66 +1,48 @@
 <?php
-	session_start();
-	require("includes/connection.php");
-	if(isset($_GET['page'])) {
-		$pages = array("products","cart");
-		if(in_array($_GET['page'], $pages)) {
-			$_page = $_GET['page'];
-		} else {
-			$_page = "products";
-		}
-	} else {
-		$_page="products";
-	}
+	require_once("header.php");
 ?>
-<!DOCTYPE html>
-	<html>
-		<head>
-			<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
-			<link rel="stylesheet" href="css/reset.css" />
-			<link rel="stylesheet" href="css/style.css" />
-			<title>Shopping Cart</title>
-
-		</head>
-		<body>
-			<div id = "container">
-				<div id = "main">
-					<?php require($_page
-					.".php");?>
-				</div><!--end main  -->
-				<div id = "sidebar">
-				<h1>Cart</h1>
-						<?php
-
-								if(isset($_SESSION['cart'])){
-
-										$sql="SELECT * FROM products WHERE id_product IN (";
-
-										foreach($_SESSION['cart'] as $id => $value) {
-												$sql.=$id.",";
-										}
-
-										$sql=substr($sql, 0, -1).") ORDER BY name ASC";
-										$query=mysql_query($sql);
-										while($row=mysql_fetch_array($query)){
-
-										?>
-												<p><?php echo $row['name'] ?> x <?php echo $_SESSION['cart'][$row['id_product']]['quantity'] ?></p>
-										<?php
-
-										}
-								?>
-										<hr />
-										<a href="index.php?page=cart">Go to cart</a>
-								<?php
-
-								}else{
-
-										echo "<p>Your Cart is empty. Please add some products.</p>";
-
-								}
-
-						?>
-				</div><!-- end sidebar -->
-			</div><!-- end container -->
-		</body>
-	</html>
+<script type="text/javascript">
+jQuery(document).ready(function()
+{
+    $('.slider').glide({
+        autoplay: 3500,
+        hoverpause: false,	//set to false for nonstop rotate
+        arrowRightText: '&rarr;',
+        arrowLeftText: '&larr;'
+    });
+});
+</script>
+<div id="w">
+	<div class="slider">
+		<ul class="slides">
+			<li class="slide">
+				<figure>
+					<img src="img/img2.jpg" alt=""/>
+				</figure>
+			</li>
+			<li class="slide">
+				<figure>
+					<img src="img/img3.jpg" alt=""/>
+				</figure>
+			</li>
+			<li class="slide">
+				<figure>
+					<img src="img/img4.jpg" alt=""/>
+				</figure>
+			</li>
+			<li class="slide">
+				<figure>
+					<img src="img/img5.jpg" alt="">
+				</figure>
+			</li>
+			<li class="slide">
+				<figure>
+					<img src="img/photo1.jpg" alt="">
+				</figure>
+			</li>
+		</ul>
+	</div>
+</div>
+<?php
+	require_once("footer.php");
+?>
