@@ -1,7 +1,9 @@
 										</div><!--Banner Close-->
 						</div><!--Container Close-->
-						<footer id="footer">
-								<center style="padding-top:5px;">&copy; Copyright 2015. Created by Team G8</center>
+						<!-- Footer -->
+						<footer class="foo">
+							<p>Blood Donation Service by <a href="#">Team G8 2015</a></p>
 						</footer>
+
 				</body>
 </html>

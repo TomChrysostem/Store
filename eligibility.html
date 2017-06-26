@@ -1,0 +1,42 @@
+	<div id = "banner">
+		<form class = "frm" method = "POST">
+			<input type = "hidden" name = "txtuserid" value = "<?php echo $_GET['userid'];?>"/>
+			<input type = "hidden" name = "txtgender" value = "<?php echo $_GET['gender'];?>"/>
+			<table>
+			<tr>
+				<th>No</th>
+				<th>Question</th>
+				<th colspan="2">Answer</th>
+			</tr>
+				<tbody>
+					<?php
+						 if(isset($_GET['gender']))
+						{
+							$gender = $_GET['gender'];
+							$qry = "SELECT * FROM tbl_bd_eligibility WHERE gender in (3,$gender)";
+							$result = mysql_query($qry) or die('Error SQL 1 :' .mysql_error());
+							$i = 0;
+							while($data = mysql_fetch_assoc($result))
+							{
+								echo '<tr class="well">
+													<td>'.++$counter.'</td>
+													<td>'.$data['description'].'</td>
+													<td><input type = "hidden" name = "txteli_'.$i.'" value = "'.$data['id'].'"></td>
+													<td><input type = "radio" name = "rdoans_'.$i.'" value = "1">Yes
+													<input type = "radio" name = "rdoans_'.$i.'" value = "2">No</td>
+											</tr>';
+								$i++;
+
+								//echo '<tr><td>'.$data['description'].'</td><td><input type = "hidden" name = "txteli_'.$i.'" value = "'.$data['id'].'"><input type = "radio" name = "rdoans_'.$i.'" value = "1">Yes<input type = "radio" name = "rdoans_'.$i.'" value = "2">No</td><tr>';
+								//$i++;
+							}
+						}
+					?>
+				</tbody>
+			</table>
+			<div style="padding-bottom: 10px;">
+				<input type = "submit" name = "btnsubmit" value = "Submit">
+				<input type = "reset" name = "btnreset" value = "Reset">
+			</div>
+		</form>
+	</div>
